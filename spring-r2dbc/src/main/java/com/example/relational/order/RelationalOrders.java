@@ -1,4 +1,4 @@
-package com.example.orders;
+package com.example.relational.order;
 
 import com.example.item.Item;
 import com.example.member.Member;
@@ -15,14 +15,21 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
+@AllArgsConstructor
+public class RelationalOrders {
 
     @Id
     private Long id;
+
     private Long memberId;
     private Long itemId;
-    private LocalDateTime createdAt;
 
+    @Transient
+    private Member member;
+
+    @Transient
+    private Set<Item> items = new HashSet<>();
+
+    private LocalDateTime createdAt;
 }

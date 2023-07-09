@@ -3,12 +3,18 @@ server:
 
 spring:
   r2dbc:
-    url: r2dbc:h2:mem://test
+    url: r2dbc:pool:h2:mem:///test
     username: sa
     password:
+  datasource:
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+h2:
+  console:
+    port: 8090
 
 logging:
   level:
     org.springframework.r2dbc.core: debug
-    com.example: debug
-

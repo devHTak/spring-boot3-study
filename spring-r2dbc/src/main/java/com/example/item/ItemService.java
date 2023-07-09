@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ItemService {
@@ -21,7 +23,12 @@ public class ItemService {
                 .map(ItemResponse::from);
     }
 
-    public Mono<Item> save(Item item) {
+    public Mono<Item> save(String itemName) {
+        Item item = Item.builder()
+                .name(itemName)
+                .createdAt(LocalDateTime.now())
+                .build();
+
         return itemRepository.save(item);
     }
 
@@ -29,5 +36,4 @@ public class ItemService {
         return itemRepository.findByName(name)
                 .map(ItemResponse::from);
     }
-
 }
